@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS heart_failure;
+
+Create Table heart_failure (
+	"Age" Integer,
+    "Sex" Varchar (10),
+    "ChestPainType" Varchar(20),
+    "RestingBP" Integer,
+    "Cholesterol" Integer,
+    "FastingBS" Integer,
+    "RestingECG" Varchar(20),
+    "MaxHR" Integer,
+    "ExerciseAngina" Varchar(20),
+    "Oldpeak" Float,
+    "ST_Slope" Varchar(20),
+    "HeartDisease" Integer);
+    
+select * from heart_failure
