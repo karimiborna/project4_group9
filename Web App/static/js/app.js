@@ -12,7 +12,6 @@ let sampleMaxHR = d3.select("#sample-metadata").append("h5");
 let sampleExerciseAng = d3.select("#sample-metadata").append("h5");
 let sampleOldPeak = d3.select("#sample-metadata").append("h5");
 let sampleSTSlope = d3.select("#sample-metadata").append("h5");
-let HeartDiesease = d3.select("#sample-metadata").append("h5");
 
 function init() {
     createSample();
@@ -25,12 +24,11 @@ function createSample() {
     sampleRestingBP.text("Resting BP: " + getRndInteger(40,100));
     sampleChol.text("Cholesterol: " + getRndInteger(40,100));
     sampleFastingBS.text("Fasting BS: " + getRndInteger(40,100));
-    sampleRestECG.text("Sample Age: " + getRndInteger(40,100));
-    sampleMaxHR.text("Sample Age: " + getRndInteger(40,100));
-    sampleExerciseAng.text("Sample Age: " + getRndInteger(40,100));
-    sampleOldPeak.text("Sample Age: " + getRndInteger(40,100));
-    sampleSTSlope.text("Sample Age: " + getRndInteger(40,100));
-    HeartDiesease.text("Sample Age: " + getRndInteger(40,100));
+    sampleRestECG.text("Resting ECG: " + getRndInteger(40,100));
+    sampleMaxHR.text("Max HR: " + getRndInteger(40,100));
+    sampleExerciseAng.text("Exercise Ang: " + getRndInteger(40,100));
+    sampleOldPeak.text("Old Peak: " + getRndInteger(40,100));
+    sampleSTSlope.text("ST Slope: " + getRndInteger(40,100));
 }
 
 function getRndInteger(min, max) {
