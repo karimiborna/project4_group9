@@ -19,17 +19,68 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6" id="input-data">
-              <div class="col-md-3" id="input-left">
-                <div id="sample-metadata-input-left" class="panel-body"></div>
-              </div>
-              <div class="col-md-3" id="input-right">
-                <div id="sample-metadata-input-right" class="panel-body"></div>
-              </div>
+            <div class="col-md-3" id="info">
+              <p>This web app does this....</p>
+            </div>
+            <div class="col-md-3" id="choose-model">
+              <p>Choose which model to test</p>
+            </div>
+            <div class="col-md-3" id="input-data">
+                <!-- <div id="sample-metadata-input-left" class="panel-body"></div> -->
+                <form>
+                  <fieldset>
+                    <legend>Please Enter Your Info: </legend>
+                      <label for="age">Age:</label>
+                      <input type="number" id="age" name="age"></input><br>
+                      <label for="sex">Sex:</label>
+                      <select id="sex" name="sex">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                      </select><br>
+                      <label for="age">Chest Pain type:</select>
+                      <select id="chest-pain" name="chest-pain">
+                        <option value="TA">TA</option>
+                        <option value="NAP">NAP</option>
+                        <option value="ATA">ATA</option>
+                        <option value="ASY">ASY</option>
+                      </select><br>
+                      <label for="rest-bp">Resting BP: </label>
+                      <input type="number" id="rest-bp" name="rest-bp"></input><br>
+                      <label for="chol">Cholesterol:</label>
+                      <input type="number" id="chol" name="chol"></input><br>
+                      <label for="fast-bs">Fasting BS:</label>
+                      <select id="fast-bs" name="fast-bs">
+                        <option value=0>0</option>
+                        <option value=1>1</option>
+                      </select><br>
+                      <label for="rest-ecg">Resting ECG:</label>
+                      <select id="rest-ecg" name="rest-ecg">
+                        <option value="ST">ST</option>
+                        <option value="LVH">LVH</option>
+                        <option value="Normal">Normal</option>
+                      </select><br>
+                      <label for="max-hr">Max Hr:</label>
+                      <input type="number" id="max-hr" name="max-hr"></input><br>
+                      <label for="exer-ang">Exercise Angina:</label>
+                      <select id="exer-ang" name="exer-ang">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select><br>
+                      <label for="oldpeak">Old Peak:</label>
+                      <input type="number" id="oldpeak" name="oldpeak"></input><br>
+                      <label for="st-slope">ST Slope:</label>
+                      <select id="st-slope" name="st-slope">
+                        <option value="Flat">Flat</option>
+                        <option value="Up">Up</option>
+                        <option value="Down">Down</option>
+                      </select><br>
+                  </fieldset>
+                </form>
             </div>
             <div class="col-md-3" id="create-random-person">
+                <h4>Generate Random Sample</h4>
                 <div id="sample-metadata-random" class="panel-body"></div>
-                <button id="random-person"> Generate Random Person </button>
+                <button id="random-person"> <h1>Generate</h1></button>
             </div>
         </div>
     </div>
