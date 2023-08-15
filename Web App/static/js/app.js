@@ -1,17 +1,17 @@
 let random_sample_buttom = d3.select("#random-person");
 let randomInfo = d3.select("#sampleInfo");
 
-let sampleAge_input = d3.select("#sample-metadata-input").append("input").text("Age: ");
-let sampleSex_input = d3.select("#sample-metadata-input").append("select");
-let sampleChestPain_input = d3.select("#sample-metadata-input").append("select");
-let sampleRestingBP_input = d3.select("#sample-metadata-input").append("input");
-let sampleChol_input = d3.select("#sample-metadata-input").append("input");
-let sampleFastingBS_input = d3.select("#sample-metadata-input").append("input");
-let sampleRestECG_input = d3.select("#sample-metadata-input").append("input");
-let sampleMaxHR_input = d3.select("#sample-metadata-input").append("input");
-let sampleExerciseAng_input = d3.select("#sample-metadata-input").append("select");
-let sampleOldPeak_input = d3.select("#sample-metadata-input").append("select");
-let sampleSTSlope_input = d3.select("#sample-metadata-input").append("input");
+let sampleAge_input = d3.select("#sample-metadata-input-left").append("input").text("Age: ");
+let sampleSex_input = d3.select("#sample-metadata-input-left").append("select");
+let sampleChestPain_input = d3.select("#sample-metadata-input-left").append("select");
+let sampleRestingBP_input = d3.select("#sample-metadata-input-left").append("input");
+let sampleChol_input = d3.select("#sample-metadata-input-left").append("input");
+let sampleFastingBS_input = d3.select("#sample-metadata-input-left").append("input");
+let sampleRestECG_input = d3.select("#sample-metadata-input-right").append("input");
+let sampleMaxHR_input = d3.select("#sample-metadata-input-right").append("input");
+let sampleExerciseAng_input = d3.select("#sample-metadata-input-right").append("select");
+let sampleOldPeak_input = d3.select("#sample-metadata-input-right").append("select");
+let sampleSTSlope_input = d3.select("#sample-metadata-input-right").append("input");
 
 let sampleAgeRand = d3.select("#sample-metadata-random").append("h5");
 let sampleSexRand = d3.select("#sample-metadata-random").append("h5");
@@ -42,7 +42,6 @@ function createSample() {
     sampleExerciseAng = randomExerAng();
     sampleOldPeak = (getRandomArbitrary(-2.6, 6.2)).toFixed(2);
     sampleSTSlope = randomSlope();
-
 
     sampleAgeRand.text("Age: " + sampleAge);
     sampleSexRand.text("Sex: " + sampleSex);
@@ -90,7 +89,7 @@ function randomSlope() {
     return restECG[getRndInteger(0,3)]
 }
 
+
 random_sample_buttom.on('click', createSample);
 
 init();
-console.log(randomChestPain());
