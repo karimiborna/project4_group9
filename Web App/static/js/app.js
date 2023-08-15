@@ -13,17 +13,17 @@ let sampleExerciseAng_input = d3.select("#sample-metadata-input").append("select
 let sampleOldPeak_input = d3.select("#sample-metadata-input").append("select");
 let sampleSTSlope_input = d3.select("#sample-metadata-input").append("input");
 
-let sampleAge = d3.select("#sample-metadata-random").append("h5");
-let sampleSex = d3.select("#sample-metadata-random").append("h5");
-let sampleChestPain = d3.select("#sample-metadata-random").append("h5");
-let sampleRestingBP = d3.select("#sample-metadata-random").append("h5");
-let sampleChol = d3.select("#sample-metadata-random").append("h5");
-let sampleFastingBS = d3.select("#sample-metadata-random").append("h5");
-let sampleRestECG = d3.select("#sample-metadata-random").append("h5");
-let sampleMaxHR = d3.select("#sample-metadata-random").append("h5");
-let sampleExerciseAng = d3.select("#sample-metadata-random").append("h5");
-let sampleOldPeak = d3.select("#sample-metadata-random").append("h5");
-let sampleSTSlope = d3.select("#sample-metadata-random").append("h5");
+let sampleAgeRand = d3.select("#sample-metadata-random").append("h5");
+let sampleSexRand = d3.select("#sample-metadata-random").append("h5");
+let sampleChestPainRand = d3.select("#sample-metadata-random").append("h5");
+let sampleRestingBPRand = d3.select("#sample-metadata-random").append("h5");
+let sampleCholRand = d3.select("#sample-metadata-random").append("h5");
+let sampleFastingBSRand = d3.select("#sample-metadata-random").append("h5");
+let sampleRestECGRand = d3.select("#sample-metadata-random").append("h5");
+let sampleMaxHRRand = d3.select("#sample-metadata-random").append("h5");
+let sampleExerciseAngRand = d3.select("#sample-metadata-random").append("h5");
+let sampleOldPeakRand = d3.select("#sample-metadata-random").append("h5");
+let sampleSTSlopeRand = d3.select("#sample-metadata-random").append("h5");
 
 
 function init() {
@@ -31,33 +31,66 @@ function init() {
 }
 
 function createSample() {
-    sampleAge.text("Age: " + getRndInteger(40,100));
-    sampleSex.text("Sex: " + getRndInteger(1,2));
-    sampleChestPain.text("Chest Pain: " + getRndInteger(40,100));
-    sampleRestingBP.text("Resting BP: " + getRndInteger(40,100));
-    sampleChol.text("Cholesterol: " + getRndInteger(40,100));
-    sampleFastingBS.text("Fasting BS: " + getRndInteger(40,100));
-    sampleRestECG.text("Resting ECG: " + getRndInteger(40,100));
-    sampleMaxHR.text("Max HR: " + getRndInteger(40,100));
-    sampleExerciseAng.text("Exercise Ang: " + getRndInteger(40,100));
-    sampleOldPeak.text("Old Peak: " + getRndInteger(40,100));
-    sampleSTSlope.text("ST Slope: " + getRndInteger(40,100));
+    sampleAge = getRndInteger(25,100);
+    sampleSex = randomSex();
+    sampleChestPain = randomChestPain();
+    sampleRestingBP = getRndInteger(90, 200);
+    sampleChol = getRndInteger(100, 603);
+    sampleFastingBS = Number(Math.random() < 0.5);
+    sampleRestECG = randomRestECG();
+    sampleMaxHR = getRndInteger(60, 202);
+    sampleExerciseAng = randomExerAng();
+    sampleOldPeak = (getRandomArbitrary(-2.6, 6.2)).toFixed(2);
+    sampleSTSlope = randomSlope();
+
+
+    sampleAgeRand.text("Age: " + sampleAge);
+    sampleSexRand.text("Sex: " + sampleSex);
+    sampleChestPainRand.text("Chest Pain: " + sampleChestPain);
+    sampleRestingBPRand.text("Resting BP: " + sampleRestingBP);
+    sampleCholRand.text("Cholesterol: " + sampleChol);
+    sampleFastingBSRand.text("Fasting BS: " + sampleFastingBS);
+    sampleRestECGRand.text("Resting ECG: " + sampleRestECG);
+    sampleMaxHRRand.text("Max HR: " + sampleMaxHR);
+    sampleExerciseAngRand.text("Exercise Ang: " + sampleExerciseAng);
+    sampleOldPeakRand.text("Old Peak: " + sampleOldPeak);
+    sampleSTSlopeRand.text("ST Slope: " + sampleSTSlope);
 }
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
 
-function fiftyFifty() {
-    return Math.random() < 0.5;
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
 function randomSex() {
-    let sex = [M,F]
-    return sex[fiftyFifty()];
+    let sex = ["M","F"];
+    return sex[Number(Math.random() < 0.5)];
+}
+
+function randomChestPain() {
+    let chestPain = ["TA", "NAP", "ATA", "ASY"];
+    return chestPain[getRndInteger(0,4)]
+}
+
+function randomRestECG() {
+    let restECG = ["ST", "LVH", "Normal"]
+    return restECG[getRndInteger(0,3)]
+}
+
+function randomExerAng() {
+    let exerAng = ["Y","N"];
+    return exerAng[Number(Math.random() < 0.5)];
+}
+
+function randomSlope() {
+    let restECG = ["Flat", "Up", "Down"]
+    return restECG[getRndInteger(0,3)]
 }
 
 random_sample_buttom.on('click', createSample);
 
 init();
-console.log(randomSex());
+console.log(randomChestPain());
