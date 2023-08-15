@@ -10,7 +10,7 @@ from flask import Flask, jsonify
 #################################################
 # Database Setup
 #################################################
-engine = create_engine("sqlite:///titanic.sqlite")
+engine = create_engine("SQL HERE")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -18,7 +18,7 @@ Base = automap_base()
 Base.prepare(autoload_with=engine)
 
 # Save reference to the table
-Passenger = Base.classes.passenger
+
 
 #################################################
 # Flask Setup
