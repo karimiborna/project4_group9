@@ -63,19 +63,24 @@ function sendToModel() {
     }
 
     if (modelChoice == "log-reg") {
+        hiddenForm.attr("action", "/log");
+    }
+    if (modelChoice == "re-log-reg") {
         hiddenForm.attr("action", "/log_res");
     }
     if (modelChoice == "rand-for") {
-        hiddenForm.attr("action", "/rand_for");
+        hiddenForm.attr("action", "/rf");
     }
     if (modelChoice == "knn") {
         hiddenForm.attr("action", "/knn");
     }
     if (modelChoice == "neur-net") {
-        hiddenForm.attr("action", "/neur_net");
+        hiddenForm.attr("action", "/manuel_nn");
+    }
+    if (modelChoice == "auto-neur-net") {
+        hiddenForm.attr("action", "/auto_nn");
     }
     
-    console.log(modelChoice, sampleData);
     formAge.attr("value", sampleData[0]);
     formSex.attr("value", sampleData[1]);
     formChestPain.attr("value", sampleData[2]);
