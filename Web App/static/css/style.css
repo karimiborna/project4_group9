@@ -2,11 +2,11 @@ html,body,legend,h1,h2,h3,h4,h5 {
     font-family: "Raleway", 
     sans-serif;
     color: white;
-    font-size: medium;
 }
 
 body {
     background-color: white;
+    font-size: medium;
 }
 
 label {
@@ -39,7 +39,7 @@ img {
 }
 
 .container {
-    background-color: rgb(242, 242, 242);
+    background-color: white;
 }
 
 .row.display-flex {
@@ -70,13 +70,12 @@ img {
 }
 
 #title-panel {
-    background-color: rgb(242, 242, 242);
-    color:rgb(1, 6, 61);
+    background-color: rgb(1, 6, 61);
+    color:white;
     margin: 3px;
     border: 2px solid black;
     border-radius: 5px;
     border-width: 2px;
-    color:black;
 }
 
 #subtitle {
@@ -90,7 +89,8 @@ img {
 }
 
 #user-submit {
-    /* margin: 0 auto; */
+    width: 100%;
+    height: 100%;
 }
 
 #create-random-person {
@@ -111,7 +111,7 @@ img {
 #run-model {
     width: 75%;
     height: 75%;
-    border-radius: 100%;
+    border-radius: 20%;
     margin: 0;
     position: absolute;
     top: 50%;
