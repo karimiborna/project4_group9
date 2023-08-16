@@ -32,6 +32,19 @@ let userInputButton = d3.select("#user-submit");
 let modelChoice = d3.select('input[name="choose-model"]:checked').node().value;
 let sampleChoice = d3.select('input[name="choose-sample"]:checked').node().value;
 let runModelButton = d3.select("#run-model");
+let hiddenForm = d3.select('#send-to-flask');
+
+let formAge = d3.select("#hidden-age");
+let formSex = d3.select("#hidden-sex");
+let formChestPain = d3.select("#hidden-chest-pain");
+let formRestingBP = d3.select("#hidden-resting-BP");
+let formChol = d3.select("#hidden-chol");
+let formFastingBS = d3.select("#hidden-fast-BS");
+let formRestECG = d3.select("#hidden-age-rest-ECG");
+let formMaxHR = d3.select("#hidden-age-max-HR");
+let formExerciseAng = d3.select("#hidden-age-exer-ang");
+let formOldPeak = d3.select("#hidden-age-oldpeak");
+let formSTSlope = d3.select("#hidden-age-slop-ST");
 
 
 function init() {
@@ -48,7 +61,32 @@ function sendToModel() {
     if (sampleChoice == "random") {
         sampleData = randData;
     }
+
+    if (modelChoice == "log-reg") {
+        hiddenForm.attr("action", "/log_res");
+    }
+    if (modelChoice == "rand-for") {
+        hiddenForm.attr("action", "/rand_for");
+    }
+    if (modelChoice == "knn") {
+        hiddenForm.attr("action", "/knn");
+    }
+    if (modelChoice == "neur-net") {
+        hiddenForm.attr("action", "/neur_net");
+    }
+    
     console.log(modelChoice, sampleData);
+    formAge.attr("value", sampleData[0]);
+    formSex.attr("value", sampleData[1]);
+    formChestPain.attr("value", sampleData[2]);
+    formRestingBP.attr("value", sampleData[3]);
+    formChol.attr("value", sampleData[4]);
+    formFastingBS.attr("value", sampleData[5]);
+    formRestECG.attr("value", sampleData[6]);
+    formMaxHR.attr("value", sampleData[7]);
+    formExerciseAng.attr("value", sampleData[8]);
+    formOldPeak.attr("value", sampleData[9]);
+    formSTSlope.attr("value", sampleData[10]);
 }
 
 function userInput() {
