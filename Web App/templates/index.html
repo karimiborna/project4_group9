@@ -8,14 +8,15 @@
   <title>Heart Disease Prediciton</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../static/css/style.css" />
+  <link rel="icon" href="../static/css/heart.png" type="image/x-icon"/>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 jumbotron text-center" id="title-panel">
               <h1>Heart Disease Prediciton</h1>
-              <p>Use the interactive charts below to explore the dataset</p>
+              <p id="subtitle">Use the interactive charts below to explore the dataset</p>
             </div>
         </div>
         <div class="row" id="info">
@@ -23,9 +24,9 @@
             <p>This web app does this....</p>
           </div>
         </div>
-        <div class="row" id="predictor">
+        <div class="row display-flex" id="predictor">
             <div class="col-md-3" id="input-data">
-                <form action="/model1" method="post">
+                <form>
                     <legend>Please Enter Your Info: </legend>
                       <label for="age">Age:</label>
                       <input type="number" id="age" name="age"></input><br>
@@ -71,9 +72,8 @@
                         <option value="Up">Up</option>
                         <option value="Down">Down</option>
                       </select><br>
-                      <!-- <input type="submit" id="user-submit" value="Submit"> -->
-                      <button type="button" id="user-submit">Submit</button>
                 </form>
+                <button id="user-submit">Submit</button>
             </div>
             <div class="col-md-3" id="create-random-person">
                 <h4>Generate Random Sample</h4>
@@ -101,11 +101,10 @@
                 <input type="radio" id="user-input" value="user" name="choose-sample" checked="checked">
                 <label for="user-input">Your Data</label><br>
                 <input type="radio" id="rand-samp" value="random" name="choose-sample">
-                <label for="rand-samp">Random Sample</label><br>
+                <label for="rand-samp">Random Sample</label>
               </form>
             </div>
             <div class="col-md-3" id="result-panel">
-              <h2>Results Here!</h2>
               <form id="send-to-flask" action="/log_res" method="post" name="send-to-flask">
                 <input type='hidden' id='hidden-age' name='hidden-age'/>
                 <input type='hidden' id='hidden-sex' name='hidden-sex'/>
@@ -119,17 +118,20 @@
                 <input type='hidden' id='hidden-oldpeak' name='hidden-oldpeak'/>
                 <input type='hidden' id='hidden-slop-ST' name='hidden-slop-ST'/>
               </form>
-              <button type='submit' form='send-to-flask' id="run-model" value="submit">Predict!</button>
+              <button type='submit' form='send-to-flask' id="run-model" value="submit"><img src="../static/css/heart.png" id="heart-button"><br>Predict!</button>
             </div>
         </div>
         <div class="row" id="visuals">
-          <h1>Visuals will go here</h1>
+          <div class="col-md-12">
+            <img src="../../model_comparison_dashboard.png" id="accuract-table"></img>
+          </div>
         </div>
     </div>
 
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="../static/js/app.js"></script>
+  <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Smashicons - Flaticon</a>
 </body>
 
 </html>
