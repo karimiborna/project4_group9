@@ -1,17 +1,48 @@
 import numpy as np
-
 import sqlalchemy
+import pandas as pd
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, func
+from sqlalchemy import create_engine, func, text
 from flask import Flask, render_template
 import joblib
 import pickle
 import sklearn
 import tensorflow as tf
-from sklearn.metrics import classification_report
 from flask import request
 from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+engine = create_engine(f"postgresql+psycopg2://postgres:Bornak632@localhost:5432/final_project")
+conn = engine.connect()
+Base = automap_base()
+Base.prepare(autoload_with=engine)
+session = Session(engine)
+
+heart_data_list = []
+heart_data = conn.execute(text(""" SELECT * FROM heart_failure """))
+for results in heart_data:
+    heart_failure = {}
+    heart_failure["age"] = results[0]
+    heart_failure["sex"] = results[1]
+    heart_failure["chest_pain_type"] = results[2]
+    heart_failure["resting_bp"] = results[3]
+    heart_failure["cholesterol"] = results[4]
+    heart_failure["fasting_bs"] = results[5]
+    heart_failure["resting_ecg"] = results[6]
+    heart_failure["max_hr"] = results[7]
+    heart_failure["exercise_aniga"] = results[8]
+    heart_failure["old_peak"] = results[9]
+    heart_failure["st_slope"] = results[10]
+    heart_failure["heart_disease"] = results[11]
+    heart_data_list.append(heart_failure)
+session.close()
+heart_df = pd.DataFrame(heart_data_list)
+
+dummies = pd.get_dummies(heart_df)
+
+y = dummies["heart_disease"]
+X = dummies.drop(columns=["heart_disease"])
 
 def getData():
     age = request.form.get('hidden-age')
@@ -21,51 +52,86 @@ def getData():
     chol = request.form.get('hidden-chol')
     fastBS = request.form.get('hidden-fast-BS')
     restECG = request.form.get('hidden-rest-ECG')
+    # maxHR does not work:
     maxHR = request.form.get('hidden-max-HR')
     exerAng = request.form.get('hidden-exer-ang')
     oldPeak = request.form.get('hidden-oldpeak')
     slope = request.form.get('hidden-slop-ST')
 
-    newArray = [age,restingBP,chol,fastBS,maxHR,oldPeak]
+    newArray = [int(age),int(restingBP),int(chol),int(fastBS),int('114'),float(oldPeak),]
 
     if sex == 'F':
-        newArray.append(1,0)
+        numbers = [1,0]
+        newArray.extend(numbers)
     else:
-        newArray.append(0,1)
+        numbers = [0,1]
+        newArray.extend(numbers)
 
     if chestPain == "ASY":
-        newArray.append(1,0,0,0)
+        numbers = [1,0,0,0]
+        newArray.extend(numbers)
     elif chestPain == "ATA":
-        newArray.append(0,1,0,0)
+        numbers = [0,1,0,0]
+        newArray.extend(numbers)
     elif chestPain == "NAP":
-        newArray.append(0,0,1,0)
+        numbers = [0,0,1,0]
+        newArray.extend(numbers)
     else:
-        newArray.append(0,0,0,1)
+        numbers = [0,0,0,1]
+        newArray.extend(numbers)
 
     if restECG == "LVH":
-        newArray.append(1,0,0)
+        numbers = [1,0,0]
+        newArray.extend(numbers)
     elif restECG == "Normal":
-        newArray.append(0,1,0)
+        numbers = [0,1,0]
+        newArray.extend(numbers)
     else:
-        newArray.append(0,0,1)
+        numbers = [0,0,1]
+        newArray.extend(numbers)
     
     if exerAng == "N":
-        newArray.append(1,0)
+        numbers = [1,0]
+        newArray.extend(numbers)
     else:
-        newArray.append(0,1)
+        numbers = [0,1]
+        newArray.extend(numbers)
     
     if slope == "Down":
-        newArray.append(1,0,0)
+        numbers = [1,0,0]
+        newArray.extend(numbers)
     elif slope == "Flat":
-        newArray.append(0,1,0)
+        numbers = [0,1,0]
+        newArray.extend(numbers)
     else:
-        newArray.append(0,0,1)
+        numbers = [0,0,1]
+        newArray.extend(numbers)
+
+    newArray = np.array(newArray)
+    dataArray = newArray.reshape(2,10)
+
+    return(dataArray)
+
+def predictData(data, model, model_type):
+    
+    inputdata = data.reshape(1,20)
 
     Scaler = StandardScaler()
-    x_data = Scaler.fit(newArray)
-    x_data_scaled = x_data.transform(newArray)
+    X_Scaler = Scaler.fit(X)
+    X_scaled = X_Scaler.transform(X)
+    inputdata_scaled = X_Scaler.transform(inputdata)
 
-    print(newArray)
+    if model_type == 'sk':
+        outputModel = model.fit(X_scaled,y)
+
+    # this does not work yet:
+
+    # else:
+    #     outputModel = tuner.search(X_train_scaled,y_train,epochs=20,validation_data=(X_test_scaled,y_test))
+
+    predictions = outputModel.predict(inputdata_scaled)
+
+    return(predictions)
 
 
 #################################################
@@ -78,53 +144,71 @@ app = Flask(__name__)
 #################################################
 
 @app.route("/manual_nn", methods = ['POST'])
+# this will not work yet
 def manual_nn():
-    # neural_network_model = tf.keras.models.load_model('../Neural_Network/Resources/manual_model.h5')
-    getData()
-    #predictions = model.predict(array)
+    model = tf.keras.models.load_model('../Neural_Network/Resources/manual_model.h5')
+    model_type = 'nn'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        
+        f'{user}'
     )
 
 @app.route("/log_res", methods = ['POST'])
 def log_res():
-    logistic_resampled_model = joblib.load('../Logistic_Regression/Resources/model_resampled.pkl')
+    model = joblib.load('../Logistic_Regression/Resources/model_resampled.pkl')
+    model_type = 'sk'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        f"Available Routes:<br/>"
+        f'{user}'
     )
 
 @app.route("/log", methods = ['POST'])
 def log():
-    logistic_model = joblib.load('../Logistic_Regression/Resources/pickle_model.pkl')
+    model = joblib.load('../Logistic_Regression/Resources/pickle_model.pkl')
+    model_type = 'sk'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        f"Available Routes:<br/>"
+        f'{user}'
     )
 
 @app.route("/rf", methods = ['POST'])
+# this has an unsolved error
 def rf():
-    random_forest_model = joblib.load('../Random_Forest/Resources/random_forest.pickle')
+    model = joblib.load('../Random_Forest/Resources/random_forest.pickle')
+    model_type = 'sk'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        f"Available Routes:<br/>"
+        f'{user}'
     )
 
 @app.route("/auto_nn", methods = ['POST'])
+# this will not work yet
 def auto_nn():
-    auto_neural_network_model = tf.keras.models.load_model('../Neural_Network/Resources/auto_model.h5')
+    model = tf.keras.models.load_model('../Neural_Network/Resources/auto_model.h5')
+    model_type = 'nn'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        f"Available Routes:<br/>"
+        f'{user}'
     )
 
 @app.route("/knn", methods = ['POST'])
 def knn():
-    knn_model = joblib.load('../KNN/Resources/knn_model.pickle')
+    model = joblib.load('../KNN/Resources/knn_model.pickle')
+    model_type = 'sk'
+    data = getData()
+    user = predictData(data, model, model_type)
     return (
-        f"Available Routes:<br/>"
+        f'{user}'
     )
 
 @app.route("/")
 def home():
-    # return render_template("index.html")
-    getData()
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
