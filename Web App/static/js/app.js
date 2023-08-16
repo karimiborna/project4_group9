@@ -75,7 +75,7 @@ function sendToModel() {
         hiddenForm.attr("action", "/knn");
     }
     if (modelChoice == "neur-net") {
-        hiddenForm.attr("action", "/manuel_nn");
+        hiddenForm.attr("action", "/manual_nn");
     }
     if (modelChoice == "auto-neur-net") {
         hiddenForm.attr("action", "/auto_nn");

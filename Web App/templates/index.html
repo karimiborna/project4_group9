@@ -106,18 +106,18 @@
             </div>
             <div class="col-md-3" id="result-panel">
               <h2>Results Here!</h2>
-              <form id="send-to-flask" action="/log_res" method="post">
-                <input type='hidden' id='hidden-age' name='hidden-form'/>
-                <input type='hidden' id='hidden-sex' name='hidden-form'/>
-                <input type='hidden' id='hidden-chest-pain' name='hidden-form'/>
-                <input type='hidden' id='hidden-resting-BP' name='hidden-form'/>
-                <input type='hidden' id='hidden-chol' name='hidden-form'/>
-                <input type='hidden' id='hidden-fast-BS' name='hidden-form'/>
-                <input type='hidden' id='hidden-age-rest-ECG' name='hidden-form'/>
-                <input type='hidden' id='hidden-age-max-HR' name='hidden-form'/>
-                <input type='hidden' id='hidden-age-exer-ang' name='hidden-form'/>
-                <input type='hidden' id='hidden-age-oldpeak' name='hidden-form'/>
-                <input type='hidden' id='hidden-age-slop-ST' name='hidden-form'/>
+              <form id="send-to-flask" action="/log_res" method="post" name="send-to-flask">
+                <input type='hidden' id='hidden-age' name='hidden-age'/>
+                <input type='hidden' id='hidden-sex' name='hidden-sex'/>
+                <input type='hidden' id='hidden-chest-pain' name='hidden-chest-pain'/>
+                <input type='hidden' id='hidden-resting-BP' name='hidden-resting-BP'/>
+                <input type='hidden' id='hidden-chol' name='hidden-chol'/>
+                <input type='hidden' id='hidden-fast-BS' name='hidden-fast-BS'/>
+                <input type='hidden' id='hidden-rest-ECG' name='hidden-rest-ECG'/>
+                <input type='hidden' id='hidden-max-HR' name='hidden-max-HR'/>
+                <input type='hidden' id='hidden-exer-ang' name='hidden-exer-ang'/>
+                <input type='hidden' id='hidden-oldpeak' name='hidden-oldpeak'/>
+                <input type='hidden' id='hidden-slop-ST' name='hidden-slop-ST'/>
               </form>
               <button type='submit' form='send-to-flask' id="run-model" value="submit">Predict!</button>
             </div>
