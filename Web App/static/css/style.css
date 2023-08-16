@@ -1,6 +1,17 @@
-html,body,h1,h2,h3,h4,h5 {
+html,body,legend,h1,h2,h3,h4,h5 {
     font-family: "Raleway", 
-    sans-serif
+    sans-serif;
+    color: white;
+    font-size: medium;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    background-color:crimson;
+    color:white;
+    font-size: medium;
+    padding: 1px;
 }
 
 .col-md-6 {
@@ -8,19 +19,39 @@ html,body,h1,h2,h3,h4,h5 {
 }
 
 .col-md-3 {
-    border: 2px solid gray;
+    box-sizing: border-box;
+    border: 3px solid transparent;
+    background-clip:padding-box;
+}
+
+#info {
+    border: 2px solid black;
     border-radius: 5px;
     border-width: 2px;
+    color:black
+}
+
+#title-panel {
+    background-color: black;
+}
+
+#input-data {
+    background-color: teal;
+    color:white;
+    font-size: medium;
 }
 
 #create-random-person {
     background-color: steelblue;
     color:white;
 }
-button {
-    width: 100%;
-    height: 100%;
-    background-color:rgb(167, 21, 21);
-    color:white;
-    padding: 1px;
+
+#choose-model-panel {
+    background-color: orange;
+    color: white;
+}
+
+#result-panel {
+    background-color: rgb(35, 145, 35);
+    color: white;
 }

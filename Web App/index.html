@@ -13,26 +13,19 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 jumbotron text-center">
+            <div class="col-md-12 jumbotron text-center" id="title-panel">
               <h1>Heart Disease Prediciton</h1>
               <p>Use the interactive charts below to explore the dataset</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3" id="info">
-              <p>This web app does this....</p>
-            </div>
-            <div class="col-md-3" id="choose-model">
-              <p>Choose which model to test</p>
-              <select id="model" name="model">
-                <option value="logistic-regression">Logistic Regression</option>
-                <option value="random-forest">Random Forest</option>
-              </select>
-            </div>
+        <div class="row" id="info">
+          <div class="col-md-12" id="info">
+            <p>This web app does this....</p>
+          </div>
+        </div>
+        <div class="row" id="predictor">
             <div class="col-md-3" id="input-data">
-                <!-- <div id="sample-metadata-input-left" class="panel-body"></div> -->
                 <form>
-                  <fieldset>
                     <legend>Please Enter Your Info: </legend>
                       <label for="age">Age:</label>
                       <input type="number" id="age" name="age"></input><br>
@@ -54,8 +47,8 @@
                       <input type="number" id="chol" name="chol"></input><br>
                       <label for="fast-bs">Fasting BS:</label>
                       <select id="fast-bs" name="fast-bs">
-                        <option value=0>0</option>
-                        <option value=1>1</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
                       </select><br>
                       <label for="rest-ecg">Resting ECG:</label>
                       <select id="rest-ecg" name="rest-ecg">
@@ -78,14 +71,42 @@
                         <option value="Up">Up</option>
                         <option value="Down">Down</option>
                       </select><br>
-                  </fieldset>
+                      <!-- <input type="submit" id="user-submit" value="Submit"> -->
+                      <button type="button" id="user-submit">Submit</button>
                 </form>
             </div>
             <div class="col-md-3" id="create-random-person">
                 <h4>Generate Random Sample</h4>
                 <div id="sample-metadata-random" class="panel-body"></div>
-                <button id="random-person"> <h1>Generate</h1></button>
+                <button id="random-person">Generate</button>
             </div>
+            <div class="col-md-3" id="choose-model-panel">
+              <p>Choose which model to test</p>
+              <form>
+                <input type="radio" id="log-reg" value="log-reg" name="choose-model" checked="checked">
+                <label for="log-reg">Logistic Regression</label><br>
+                <input type="radio" id="rand-for" value="rand-for" name="choose-model">
+                <label for="rand-for">Random Forest</label><br>
+                <input type="radio" id="knn" value="knn" name="choose-model">
+                <label for="knn">Nearest Neighbor</label><br>
+                <input type="radio" id="neur-net" value="neur-net" name="choose-model">
+                <label for="neur-net">Neural Network</label><br>
+              </form><br>
+              <p>Choose Sample: </p>
+              <form>
+                <input type="radio" id="user-input" value="user" name="choose-sample" checked="checked">
+                <label for="user-input">Your Data</label><br>
+                <input type="radio" id="rand-samp" value="random" name="choose-sample">
+                <label for="rand-samp">Random Sample</label><br>
+              </form>
+            </div>
+            <div class="col-md-3" id="result-panel">
+              <h2>Results Here!</h2>
+              <button id="run-model">Predict!</button>
+            </div>
+        </div>
+        <div class="row" id="visuals">
+          <h1>Visuals will go here</h1>
         </div>
     </div>
 
