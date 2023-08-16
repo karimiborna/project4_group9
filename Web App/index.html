@@ -25,7 +25,7 @@
         </div>
         <div class="row" id="predictor">
             <div class="col-md-3" id="input-data">
-                <form>
+                <form action="/model1" method="post">
                     <legend>Please Enter Your Info: </legend>
                       <label for="age">Age:</label>
                       <input type="number" id="age" name="age"></input><br>
@@ -85,12 +85,16 @@
               <form>
                 <input type="radio" id="log-reg" value="log-reg" name="choose-model" checked="checked">
                 <label for="log-reg">Logistic Regression</label><br>
+                <input type="radio" id="re-log-reg" value="re-log-reg" name="choose-model">
+                <label for="re-log-reg">Resampled Logistic Regression</label><br>
                 <input type="radio" id="rand-for" value="rand-for" name="choose-model">
                 <label for="rand-for">Random Forest</label><br>
                 <input type="radio" id="knn" value="knn" name="choose-model">
                 <label for="knn">Nearest Neighbor</label><br>
                 <input type="radio" id="neur-net" value="neur-net" name="choose-model">
                 <label for="neur-net">Neural Network</label><br>
+                <input type="radio" id="auto-neur-net" value="auto-neur-net" name="choose-model">
+                <label for="auto-neur-net">Auto Neural Network</label><br>
               </form><br>
               <p>Choose Sample: </p>
               <form>
@@ -102,7 +106,20 @@
             </div>
             <div class="col-md-3" id="result-panel">
               <h2>Results Here!</h2>
-              <button id="run-model">Predict!</button>
+              <form id="send-to-flask" action="/log_res" method="post">
+                <input type='hidden' id='hidden-age' name='hidden-form'/>
+                <input type='hidden' id='hidden-sex' name='hidden-form'/>
+                <input type='hidden' id='hidden-chest-pain' name='hidden-form'/>
+                <input type='hidden' id='hidden-resting-BP' name='hidden-form'/>
+                <input type='hidden' id='hidden-chol' name='hidden-form'/>
+                <input type='hidden' id='hidden-fast-BS' name='hidden-form'/>
+                <input type='hidden' id='hidden-age-rest-ECG' name='hidden-form'/>
+                <input type='hidden' id='hidden-age-max-HR' name='hidden-form'/>
+                <input type='hidden' id='hidden-age-exer-ang' name='hidden-form'/>
+                <input type='hidden' id='hidden-age-oldpeak' name='hidden-form'/>
+                <input type='hidden' id='hidden-age-slop-ST' name='hidden-form'/>
+              </form>
+              <button type='submit' form='send-to-flask' id="run-model" value="submit">Predict!</button>
             </div>
         </div>
         <div class="row" id="visuals">
