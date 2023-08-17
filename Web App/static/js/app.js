@@ -40,11 +40,11 @@ let formChestPain = d3.select("#hidden-chest-pain");
 let formRestingBP = d3.select("#hidden-resting-BP");
 let formChol = d3.select("#hidden-chol");
 let formFastingBS = d3.select("#hidden-fast-BS");
-let formRestECG = d3.select("#hidden-age-rest-ECG");
-let formMaxHR = d3.select("#hidden-age-max-HR");
-let formExerciseAng = d3.select("#hidden-age-exer-ang");
-let formOldPeak = d3.select("#hidden-age-oldpeak");
-let formSTSlope = d3.select("#hidden-age-slop-ST");
+let formRestECG = d3.select("#hidden-rest-ECG");
+let formMaxHR = d3.select("#hidden-max-HR");
+let formExerciseAng = d3.select("#hidden-exer-ang");
+let formOldPeak = d3.select("#hidden-oldpeak");
+let formSTSlope = d3.select("#hidden-slop-ST");
 
 
 function init() {
