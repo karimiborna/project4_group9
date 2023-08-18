@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Heart Disease Prediction</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css" />
+  <link rel="icon" href="../static/css/heart.png" type="image/x-icon"/>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center" id="title-panel">
+              <h1>Heart Disease Prediciton</h1>
+              <h2 id="subtitle">Submit health data to predict potential heart disease</h2>
+            </div>
+        </div>
+        <div class="row" id="info">
+          <div class="col-md-12" id="info">
+            <h3 id="info-text">Enter your own information or generate a random sample to predict whether you may be susceptible to heart disease. Six different machine learning models were tested to compare their accuracy. Use the third panel to choose a model and sample type.</h3>
+          </div>
+        </div>
+        <div class="row display-flex" id="predictor">
+            <div class="col-md-3" id="input-data">
+                <form>
+                    <legend>Please Enter Your Info: </legend>
+                      <label for="age">Age:</label>
+                      <input type="number" id="age" name="age"></input><br>
+                      <label for="sex">Sex:</label>
+                      <select id="sex" name="sex">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                      </select><br>
+                      <label for="age">Chest Pain type:</select>
+                      <select id="chest-pain" name="chest-pain">
+                        <option value="TA">TA</option>
+                        <option value="NAP">NAP</option>
+                        <option value="ATA">ATA</option>
+                        <option value="ASY">ASY</option>
+                      </select><br>
+                      <label for="rest-bp">Resting BP: </label>
+                      <input type="number" id="rest-bp" name="rest-bp"></input><br>
+                      <label for="chol">Cholesterol:</label>
+                      <input type="number" id="chol" name="chol"></input><br>
+                      <label for="fast-bs">Fasting BS:</label>
+                      <select id="fast-bs" name="fast-bs">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                      </select><br>
+                      <label for="rest-ecg">Resting ECG:</label>
+                      <select id="rest-ecg" name="rest-ecg">
+                        <option value="ST">ST</option>
+                        <option value="LVH">LVH</option>
+                        <option value="Normal">Normal</option>
+                      </select><br>
+                      <label for="max-hr">Max Hr:</label>
+                      <input type="number" id="max-hr" name="max-hr"></input><br>
+                      <label for="exer-ang">Exercise Angina:</label>
+                      <select id="exer-ang" name="exer-ang">
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                      </select><br>
+                      <label for="oldpeak">Old Peak:</label>
+                      <input type="number" id="oldpeak" name="oldpeak"></input><br>
+                      <label for="st-slope">ST Slope:</label>
+                      <select id="st-slope" name="st-slope">
+                        <option value="Flat">Flat</option>
+                        <option value="Up">Up</option>
+                        <option value="Down">Down</option>
+                      </select><br>
+                </form>
+                <button id="user-submit">Submit</button>
+            </div>
+            <div class="col-md-3" id="create-random-person">
+                <h4>Generate Random Sample</h4>
+                <div id="sample-metadata-random" class="panel-body"></div>
+                <button id="random-person">Generate</button>
+            </div>
+            <div class="col-md-3" id="choose-model-panel">
+              <p>Choose which model to test</p>
+              <form>
+                <input type="radio" id="log-reg" value="log-reg" name="choose-model" checked="checked">
+                <label for="log-reg">Logistic Regression</label><br>
+                <input type="radio" id="re-log-reg" value="re-log-reg" name="choose-model">
+                <label for="re-log-reg">Resampled Logistic Regression</label><br>
+                <input type="radio" id="rand-for" value="rand-for" name="choose-model">
+                <label for="rand-for">Random Forest</label><br>
+                <input type="radio" id="knn" value="knn" name="choose-model">
+                <label for="knn">Nearest Neighbor</label><br>
+                <input type="radio" id="neur-net" value="neur-net" name="choose-model">
+                <label for="neur-net">Neural Network</label><br>
+                <input type="radio" id="auto-neur-net" value="auto-neur-net" name="choose-model">
+                <label for="auto-neur-net">Auto Neural Network</label><br>
+              </form><br>
+              <p>Choose Sample: </p>
+              <form>
+                <input type="radio" id="user-input" value="user" name="choose-sample" checked="checked">
+                <label for="user-input">Your Data</label><br>
+                <input type="radio" id="rand-samp" value="random" name="choose-sample">
+                <label for="rand-samp">Random Sample</label>
+              </form>
+            </div>
+            <div class="col-md-3" id="result-panel">
+              <form id="send-to-flask" action="/log_res" method="post" name="send-to-flask">
+                <input type='hidden' id='hidden-age' name='hidden-age'/>
+                <input type='hidden' id='hidden-sex' name='hidden-sex'/>
+                <input type='hidden' id='hidden-chest-pain' name='hidden-chest-pain'/>
+                <input type='hidden' id='hidden-resting-BP' name='hidden-resting-BP'/>
+                <input type='hidden' id='hidden-chol' name='hidden-chol'/>
+                <input type='hidden' id='hidden-fast-BS' name='hidden-fast-BS'/>
+                <input type='hidden' id='hidden-rest-ECG' name='hidden-rest-ECG'/>
+                <input type='hidden' id='hidden-max-HR' name='hidden-max-HR'/>
+                <input type='hidden' id='hidden-exer-ang' name='hidden-exer-ang'/>
+                <input type='hidden' id='hidden-oldpeak' name='hidden-oldpeak'/>
+                <input type='hidden' id='hidden-slop-ST' name='hidden-slop-ST'/>
+              </form>
+              <button type='submit' form='send-to-flask' id="run-model" value="submit"><img src="../static/css/heart.png" id="heart-button"><br>Predict</button>
+            </div>
+        </div>
+        <div class="row" id="visuals">
+          <div class="col-md-12">
+            <img src="../../model_comparison_dashboard.png" id="accuract-table"></img>
+          </div>
+        </div>
+    </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/js/app.js"></script>
+  <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Smashicons - Flaticon</a>
+</body>
+
+</html>

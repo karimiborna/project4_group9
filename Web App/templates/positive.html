@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Heart Disease Prediciton</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css" />
+  <link rel="icon" href="../static/css/heart.png" type="image/x-icon"/>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center" id="title-panel">
+              <h1>Heart Disease Prediciton</h1>
+              <h2 id="subtitle">Submit health data to predict potential heart disease</h2>
+            </div>
+        </div>
+        <div class="row display-flex" id="predictor">
+            <div class="col-md-12" id="outcome">
+                <h1>Positive</h1>
+                <h2>The model predicted that you may be susceptible to heart disease.</h2>
+            </div>
+        </div>
+        <div class="row display-flex" id="back-button-row">
+            <div class="col-md-offset-3"></div>
+            <div class="col-md-6">
+                <a href="{{ url_for('/') }}"></a><button role="link" href="/" id="go-back-button"><h3>New Sample</h3></button>
+            </div>
+        </div>
+        <div class="row" id="visuals">
+            <div class="col-md-12">
+              <img src="../../model_comparison_dashboard.png" id="accuract-table"></img>
+            </div>
+          </div>
+    </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/js/app.js"></script>
+  <a href="https://www.flaticon.com/free-icons/heart" title="heart icons">Heart icons created by Smashicons - Flaticon</a>
+</body>
+
+</html>
