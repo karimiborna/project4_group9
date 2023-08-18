@@ -52,13 +52,12 @@ def getData():
     chol = request.form.get('hidden-chol')
     fastBS = request.form.get('hidden-fast-BS')
     restECG = request.form.get('hidden-rest-ECG')
-    # maxHR does not work:
     maxHR = request.form.get('hidden-max-HR')
     exerAng = request.form.get('hidden-exer-ang')
     oldPeak = request.form.get('hidden-oldpeak')
     slope = request.form.get('hidden-slop-ST')
 
-    newArray = [int(age),int(restingBP),int(chol),int(fastBS),int('114'),float(oldPeak),]
+    newArray = [int(age),int(restingBP),int(chol),int(fastBS),int(maxHR),float(oldPeak),]
 
     if sex == 'F':
         numbers = [1,0]
@@ -107,6 +106,8 @@ def getData():
         numbers = [0,0,1]
         newArray.extend(numbers)
 
+    
+
     newArray = np.array(newArray)
     dataArray = newArray.reshape(2,10)
 
@@ -123,22 +124,26 @@ def predictData(data, model, model_type):
 
     if model_type == 'sk':
         outputModel = model.fit(X_scaled,y)
+        predictions = outputModel.predict(inputdata_scaled)
 
-    # this does not work yet:
+    else:
+        outputModel = model
+        predictions = outputModel.predict(X)
 
-    # else:
-    #     outputModel = tuner.search(X_train_scaled,y_train,epochs=20,validation_data=(X_test_scaled,y_test))
-
-    predictions = outputModel.predict(inputdata_scaled)
+    
 
     return(predictions)
 
+def checkHR():
+
+    maxHR = request.form.get('hidden-max-HR')
+
+    return(maxHR)
 
 #################################################
 # Flask Setup
 #################################################
 app = Flask(__name__)
-# app.run(host='127.0.0.1', port=5000)
 #################################################
 # Flask Routes
 #################################################
@@ -175,7 +180,6 @@ def log():
     )
 
 @app.route("/rf", methods = ['POST'])
-# this has an unsolved error
 def rf():
     model = joblib.load('../Random_Forest/Resources/random_forest.pickle')
     model_type = 'sk'
@@ -186,7 +190,6 @@ def rf():
     )
 
 @app.route("/auto_nn", methods = ['POST'])
-# this will not work yet
 def auto_nn():
     model = tf.keras.models.load_model('../Neural_Network/Resources/auto_model.h5')
     model_type = 'nn'
