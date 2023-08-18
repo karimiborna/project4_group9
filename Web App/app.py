@@ -128,7 +128,7 @@ def predictData(data, model, model_type):
 
     else:
         outputModel = model
-        predictions = outputModel.predict(X)
+        predictions = outputModel.predict(inputdata_scaled)
 
     
 
@@ -149,13 +149,12 @@ app = Flask(__name__)
 #################################################
 
 @app.route("/manual_nn", methods = ['POST'])
-# this will not work yet
 def manual_nn():
     model = tf.keras.models.load_model('../Neural_Network/Resources/manual_model.h5')
     model_type = 'nn'
     data = getData()
     user = predictData(data, model, model_type)
-    if user == [0]:
+    if user[0] < 0.5:
         return render_template("negative.html")
     else:
         return render_template("positive.html")
@@ -199,7 +198,8 @@ def auto_nn():
     model_type = 'nn'
     data = getData()
     user = predictData(data, model, model_type)
-    if user == [0]:
+    print(user[0])
+    if user[0] < 0.5:
         return render_template("negative.html")
     else:
         return render_template("positive.html")
