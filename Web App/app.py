@@ -13,7 +13,7 @@ from flask import request
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 
-engine = create_engine(f"postgresql+psycopg2://postgres:Bornak632@localhost:5432/final_project")
+engine = create_engine(f"postgresql+psycopg2://postgres:postgres@localhost:5432/final_project")
 conn = engine.connect()
 Base = automap_base()
 Base.prepare(autoload_with=engine)
