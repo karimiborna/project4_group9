@@ -79,6 +79,18 @@ img {
     background-color: rgb(21, 42, 69);
     padding: 25px;
 }
+
+.col-md-12 {
+    box-sizing: border-box;
+    border: 5px solid white;
+    border-radius: 15px;
+    background-clip:padding-box;
+    margin: 0 auto;
+    text-align:center;
+    display: inline-block;
+    padding: 25px;
+}
+
 #info {
     border: 2px solid black;
     border-radius: 5px;
@@ -146,4 +158,12 @@ img {
     border: 1px solid black;
     border-radius: 10px;
     background-clip:padding-box;
+}
+
+#outcome {
+    background-color: rgb(21, 42, 69);
+}
+
+#go-back-button {
+    text-align: center;
 }
