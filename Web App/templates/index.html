@@ -21,11 +21,12 @@
         </div>
         <div class="row" id="info">
           <div class="col-md-12" id="info">
-            <h3 id="info-text">Enter your own information or generate a random sample to predict whether you may be susceptible to heart disease. Six different machine learning models were tested to compare their accuracy. Use the third panel to choose a model and sample type.</h3>
+            <h3 id="info-text">Generate a random sample to predict whether you may be susceptible to heart disease. Six different machine learning models were tested to compare their accuracy. Use the third panel to choose a model and sample type.</h3>
           </div>
         </div>
         <div class="row display-flex" id="predictor">
-            <div class="col-md-3" id="input-data">
+          <!-- rip -->
+            <!-- <div class="col-md-3" id="input-data">
                 <form>
                     <legend>Please Enter Your Info: </legend>
                       <label for="age">Age:</label>
@@ -74,13 +75,13 @@
                       </select><br>
                 </form>
                 <button id="user-submit">Submit</button>
-            </div>
-            <div class="col-md-3" id="create-random-person">
+            </div> -->
+            <div class="col-md-4" id="create-random-person">
                 <h4>Generate Random Sample</h4>
                 <div id="sample-metadata-random" class="panel-body"></div>
                 <button id="random-person">Generate</button>
             </div>
-            <div class="col-md-3" id="choose-model-panel">
+            <div class="col-md-4" id="choose-model-panel">
               <p>Choose which model to test</p>
               <form>
                 <input type="radio" id="log-reg" value="log-reg" name="choose-model" checked="checked">
@@ -98,13 +99,13 @@
               </form><br>
               <p>Choose Sample: </p>
               <form>
-                <input type="radio" id="user-input" value="user" name="choose-sample" checked="checked">
-                <label for="user-input">Your Data</label><br>
-                <input type="radio" id="rand-samp" value="random" name="choose-sample">
+                <input type="hidden" id="user-input" value="user" name="choose-sample" >
+                <!-- <label for="user-input">Your Data</label><br> -->
+                <input type="radio" id="rand-samp" value="random" name="choose-sample" checked="checked">
                 <label for="rand-samp">Random Sample</label>
               </form>
             </div>
-            <div class="col-md-3" id="result-panel">
+            <div class="col-md-4" id="result-panel">
               <form id="send-to-flask" action="/log_res" method="post" name="send-to-flask">
                 <input type='hidden' id='hidden-age' name='hidden-age'/>
                 <input type='hidden' id='hidden-sex' name='hidden-sex'/>

@@ -128,7 +128,7 @@ def predictData(data, model, model_type):
 
     else:
         outputModel = model
-        predictions = outputModel.predict(X)
+        predictions = outputModel.predict(inputdata_scaled)
 
     
 
@@ -149,15 +149,15 @@ app = Flask(__name__)
 #################################################
 
 @app.route("/manual_nn", methods = ['POST'])
-# this will not work yet
 def manual_nn():
     model = tf.keras.models.load_model('../Neural_Network/Resources/manual_model.h5')
     model_type = 'nn'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    if user[0] < 0.5:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/log_res", methods = ['POST'])
 def log_res():
@@ -165,9 +165,10 @@ def log_res():
     model_type = 'sk'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    if user == [0]:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/log", methods = ['POST'])
 def log():
@@ -175,9 +176,10 @@ def log():
     model_type = 'sk'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    if user == [0]:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/rf", methods = ['POST'])
 def rf():
@@ -185,9 +187,10 @@ def rf():
     model_type = 'sk'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    if user == [0]:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/auto_nn", methods = ['POST'])
 def auto_nn():
@@ -195,9 +198,11 @@ def auto_nn():
     model_type = 'nn'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    print(user[0])
+    if user[0] < 0.5:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/knn", methods = ['POST'])
 def knn():
@@ -205,9 +210,10 @@ def knn():
     model_type = 'sk'
     data = getData()
     user = predictData(data, model, model_type)
-    return (
-        f'{user}'
-    )
+    if user == [0]:
+        return render_template("negative.html")
+    else:
+        return render_template("positive.html")
 
 @app.route("/")
 def home():
